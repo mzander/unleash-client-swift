@@ -7,7 +7,7 @@ import PackageDescription
 let package = Package(
     name: "UnleashClient",
     platforms: [
-          .iOS(.v10),
+          .iOS(.v11),
       ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -21,15 +21,18 @@ let package = Package(
         .package(url: "https://github.com/mxcl/PromiseKit",  from: "7.0.0-rc1"),
         .package(url: "https://github.com/Quick/Quick", from: "5.0.0"),
         .package(url: "https://github.com/Quick/Nimble", from: "10.0.0"),
-        .package(url: "https://github.com/AliSoftware/OHHTTPStubs.git", .upToNextMajor(from: "9.0.0"))
-        
+        .package(url: "https://github.com/AliSoftware/OHHTTPStubs.git", .upToNextMajor(from: "9.0.0")),
+        .package(url: "https://github.com/daisuke-t-jp/MurmurHash-Swift", from: "1.1.1")
+
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "UnleashClient",
-            dependencies: [.product(name: "PMKFoundation", package: "PromiseKit")
+            dependencies: [
+                .product(name: "PMKFoundation", package: "PromiseKit"),
+                .product(name: "MurmurHash-Swift", package: "MurmurHash-Swift")
             ], path: "./Source/UnleashClientPackage"),
         .testTarget(
             name: "unleash-client-swiftTests",
@@ -38,6 +41,6 @@ let package = Package(
                            .product(name: "OHHTTPStubsSwift", package: "OHHTTPStubs"),
                            "Nimble"],
             path: "./Tests/UnleashClientTests"),
-            
+
     ]
 )
