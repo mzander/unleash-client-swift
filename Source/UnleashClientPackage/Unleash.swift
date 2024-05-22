@@ -172,10 +172,24 @@ public class Unleash {
     // MARK: Is Enabled
 
     public func isEnabled(name: String) -> Bool {
+        return isEnabled(name: name, defaultSetting: false)
+    }
+
+    public func isEnabled(name: String, defaultSetting: Bool) -> Bool {
+        return isEnabled(name: name) { _ in defaultSetting }
+    }
+
+    private func isEnabled(name: String, fallbackAction: (String) -> Bool) -> Bool {
+        return checkEnabled(name: name, fallbackAction: fallbackAction)
+    }
+
+    private func checkEnabled(name: String, fallbackAction: (String) -> Bool ) -> Bool {
         guard
             let feature = toggles?.features.first(where: { $0.name == name }),
             feature.enabled
-        else { return false }
+        else {
+            return fallbackAction(name)
+        }
 
         for strategy in feature.strategies {
             guard
