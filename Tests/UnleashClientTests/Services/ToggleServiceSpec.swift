@@ -7,31 +7,31 @@
 
 import Foundation
 import Nimble
-import OHHTTPStubsSwift
 import OHHTTPStubs
+import OHHTTPStubsSwift
 import PromiseKit
 import Quick
 
 @testable import UnleashClient
 
-class ToggleServiceSpec : QuickSpec {
+class ToggleServiceSpec: QuickSpec {
     override func spec() {
-        let appName: String = "test app"
-        let instanceId: String = "123"
+        let appName = "test app"
+        let instanceId = "123"
         var service: ToggleService {
             return ToggleService(appName: appName, instanceId: instanceId)
         }
         var urlRequest: URLRequest?
-        
+
         afterEach {
             HTTPStubs.removeAllStubs()
         }
-        
+
         describe("#fetchToggles") {
-            let url: String = "https://test.com/"
-            let featureUrl: String = "\(url)client/features"
+            let url = "https://test.com/"
+            let featureUrl = "\(url)client/features"
             let toggles: Toggles = TogglesBuilder().build()
-            
+
             beforeEach {
                 let encoder = JSONEncoder()
                 let json = try? encoder.encode(toggles)
@@ -40,7 +40,7 @@ class ToggleServiceSpec : QuickSpec {
                     return HTTPStubsResponse(data: json!, statusCode: 200, headers: nil)
                 })
             }
-            
+
             it("sends app headers") {
                 // Act
                 waitUntil { done in
@@ -49,9 +49,9 @@ class ToggleServiceSpec : QuickSpec {
                             done()
                         }.catch { _ in
                             fail()
-                    }
+                        }
                 }
-                
+
                 // Assert
                 if let result = urlRequest {
                     expect(hasHeaderNamed("UNLEASH-APPNAME", value: appName)(result)).to(beTrue())
@@ -61,7 +61,7 @@ class ToggleServiceSpec : QuickSpec {
                     fail()
                 }
             }
-            
+
             it("returns toggles") {
                 // Act / Assert
                 waitUntil { done in
@@ -72,7 +72,7 @@ class ToggleServiceSpec : QuickSpec {
                             done()
                         }.catch { _ in
                             fail()
-                    }
+                        }
                 }
             }
         }

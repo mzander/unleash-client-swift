@@ -5,19 +5,19 @@
 //  Copyright © 2019 Silvercar. All rights reserved.
 //
 
-@testable import UnleashClient
 import Foundation
+@testable import UnleashClient
 
 class TogglesBuilder {
     private var features: [Feature] = []
-    
+
     func withFeature(feature: Feature) -> TogglesBuilder {
-        self.features.append(feature)
+        features.append(feature)
         return self
     }
-    
+
     func build() -> Toggles {
-        if (features.isEmpty) {
+        if features.isEmpty {
             features.append(FeatureBuilder().build())
         }
         return Toggles(version: 10, features: features)

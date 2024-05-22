@@ -14,51 +14,51 @@ import Quick
 
 class ToggleRepositorySpec: QuickSpec {
     override func spec() {
-        let url: URL = URL(string: "https://test.com/client/features")!
+        let url = URL(string: "https://test.com/client/features")!
         let toggles: Toggles = TogglesBuilder().build()
         var memory: MemoryCache?
         var toggleService: ToggleServiceProtocol?
         var repository: ToggleRepository {
             return ToggleRepository(memory: memory!, toggleService: toggleService!)
         }
-        
+
         describe("#toggles") {
             beforeEach {
                 memory = MemoryCache(cache: Cache(), jsonDecoder: JSONDecoder(), jsonEncoder: JSONEncoder())
-                toggleService = ToggleServiceMock(promise: Promise<Toggles>.init(error: TestError.error))
+                toggleService = ToggleServiceMock(promise: Promise<Toggles>(error: TestError.error))
             }
-            
+
             context("when has cached toggles") {
                 it("return cached toggles") {
                     // Arrange
                     memory?.put(for: "unleash-feature-toggles", value: toggles)
-                    
+
                     // Act
                     let result = repository.toggles
-                    
+
                     // Assert
                     expect(result).toNot(beNil())
                 }
             }
-            
+
             context("when does not have cached toggles") {
                 it("return optional") {
                     // Act
                     let result = repository.toggles
-                    
+
                     // Assert
                     expect(result).to(beNil())
                 }
             }
         }
-        
+
         describe("#get") {
             context("when given toggles url") {
                 it("return toggles") {
                     // Arrange
                     memory = MemoryCache(cache: Cache(), jsonDecoder: JSONDecoder(), jsonEncoder: JSONEncoder())
                     toggleService = ToggleServiceMock(promise: Promise<Toggles>.value(toggles))
-                    
+
                     // Act/Assert
                     waitUntil { done in
                         repository.get(url: url)
@@ -67,7 +67,7 @@ class ToggleRepositorySpec: QuickSpec {
                                 done()
                             }.catch { _ in
                                 fail()
-                        }
+                            }
                     }
                 }
             }

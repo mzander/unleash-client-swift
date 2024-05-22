@@ -4,19 +4,18 @@
 //
 //  Copyright © 2019 Silvercar. All rights reserved.
 //
-@testable import UnleashClient
 import Foundation
 import PromiseKit
+@testable import UnleashClient
 
-class ToggleServiceMock : ToggleServiceProtocol {
-    
+class ToggleServiceMock: ToggleServiceProtocol {
     private let promise: Promise<Toggles>
-    
+
     init(promise: Promise<Toggles>) {
         self.promise = promise
     }
-    
-    func fetchToggles(url: URL) -> Promise<Toggles> {
+
+    func fetchToggles(url _: URL) -> Promise<Toggles> {
         return promise
     }
 }
