@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class GradualRolloutRandomStrategy : Strategy {
+public class GradualRolloutRandomStrategy: Strategy {
     private let randomSeed = 100
     private let randomSeedIncrement = 1
 
@@ -19,10 +19,9 @@ public class GradualRolloutRandomStrategy : Strategy {
 
     private let strategyUtils = StrategyUtils()
 
-
-    public func isEnabled(parameters: [String : String]) -> Bool {
+    public func isEnabled(parameters: [String: String]) -> Bool {
         let percentage = strategyUtils.getPercentage(parameters["percentage"])
-        let randomNumber = Int.random(in: 0..<randomSeed)
+        let randomNumber = Int.random(in: 0 ..< randomSeed)
         return randomNumber <= percentage
     }
 }

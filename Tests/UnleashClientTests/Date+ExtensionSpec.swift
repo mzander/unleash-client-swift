@@ -1,5 +1,5 @@
 //
-//  DateExtensionSpec.swift
+//  Date+ExtensionSpec.swift
 //  UnleashTests
 //
 //  Copyright © 2019 Silvercar. All rights reserved.
@@ -16,9 +16,9 @@ class DateExtensionSpec: QuickSpec {
         describe("#iso8601DateString") {
             context("when given a date") {
                 it("formats to ISO 8601 string") {
-                    let isoformatter = ISO8601DateFormatter.init()
+                    let isoformatter = ISO8601DateFormatter()
                     let date = isoformatter.date(from: "2016-11-01T21:14:10Z")
-                 
+
                     expect(date?.iso8601DateString).to(equal("2016-11-01T21:14:10.000Z"))
                 }
             }

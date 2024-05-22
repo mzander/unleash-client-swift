@@ -9,7 +9,6 @@ import Foundation
 import MurmurHash_Swift
 
 class StrategyUtils {
-
     /**
      * Takes two string inputs, concatenates them, produces a hash, and returns a normalized value between 0 and 100.
      *
@@ -25,7 +24,7 @@ class StrategyUtils {
     func getNormalizedNumber(identifier: String, groupId: String, normalizer: UInt32) -> Int {
         let value = "\(groupId):\(identifier)".data(using: .utf8)!
         let hash = MurmurHash3.x86_32.digest(value, seed: 0)
-        return Int((hash % (normalizer)) + 1)
+        return Int((hash % normalizer) + 1)
     }
 
     /**

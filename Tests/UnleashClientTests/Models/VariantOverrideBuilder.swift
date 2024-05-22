@@ -4,8 +4,8 @@
 //
 //  Copyright © 2019 Silvercar. All rights reserved.
 //
-@testable import UnleashClient
 import Foundation
+@testable import UnleashClient
 
 class VariantOverrideBuilder {
     func build() -> VariantOverride {

@@ -12,7 +12,7 @@ class VariantDefinition: Codable {
     var weight: Int
     var payload: Payload
     var overrides: [VariantOverride]?
-    
+
     init(name: String, weight: Int, payload: Payload, overrides: [VariantOverride]?) {
         self.name = name
         self.weight = weight

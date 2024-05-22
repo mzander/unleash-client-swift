@@ -8,20 +8,20 @@
 import Foundation
 
 class Feature: Codable {
-  var name: String
-  var enabled: Bool
-  var strategies: [ActivationStrategy]
-  var variants: [VariantDefinition]?
+    var name: String
+    var enabled: Bool
+    var strategies: [ActivationStrategy]
+    var variants: [VariantDefinition]?
 
-  init(
-    name: String,
-    enabled: Bool,
-    strategies: [ActivationStrategy],
-    variants: [VariantDefinition]?
-  ) {
-    self.name = name
-    self.enabled = enabled
-    self.strategies = strategies
-    self.variants = variants
-  }
+    init(
+        name: String,
+        enabled: Bool,
+        strategies: [ActivationStrategy],
+        variants: [VariantDefinition]?
+    ) {
+        self.name = name
+        self.enabled = enabled
+        self.strategies = strategies
+        self.variants = variants
+    }
 }
