@@ -20,7 +20,7 @@ class ToggleService: ToggleServiceProtocol {
     private let instanceId: String
     private(set) var eTag = ""
 
-    init(appName: String, instanceId: String) {
+    init(appName: String, instanceId: String = "") {
         self.appName = appName
         self.instanceId = instanceId
     }
