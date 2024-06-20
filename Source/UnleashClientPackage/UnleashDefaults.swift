@@ -10,7 +10,7 @@ import Foundation
 
 enum Defaults {
     static let defaultMaxAttempts = 3
-    static let defaultRefreshInterval: TimeInterval = 3600
-    static let defaultRetryInterval: TimeInterval = 60
+    static let defaultRefreshInterval: TimeInterval = 86400
+    static let defaultRetryInterval: TimeInterval = 86400
     static let pollingThresholdMinimum: TimeInterval = 0
 }
